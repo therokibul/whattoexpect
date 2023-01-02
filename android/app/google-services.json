@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "166373807642",
+    "project_id": "whattoexpect-c7dda",
+    "storage_bucket": "whattoexpect-c7dda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166373807642:android:581b55f05f60b676bee3a3",
+        "android_client_info": {
+          "package_name": "com.example.whattoexpect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "166373807642-4t4mrp7hcg972hhvm6083i1om2a8n3vg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQqqs5LANNBWfXrJrRF7HsX0HMUzIgG-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "166373807642-4t4mrp7hcg972hhvm6083i1om2a8n3vg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "166373807642-kofa96vqtava9c9ssiaqks5og1rjofh1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.whattoexpect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
