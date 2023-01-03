@@ -5,6 +5,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    var userName = currentUser?.displayName;
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03),
@@ -18,8 +21,8 @@ class Home extends StatelessWidget {
               // centerTitle: false,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: false,
-                title: const Text(
-                  'Hi, Aishwariya Farahi',
+                title: Text(
+                  'Hi, $userName',
                   style: TextStyle(fontWeight: FontWeight.bold),
                   // textScaleFactor: 2,
                 ),
@@ -168,7 +171,7 @@ class Home extends StatelessWidget {
               crossAxisCount: 2,
               children: [
                 navButton(() {
-                  Get.to( Wieght());
+                  Get.to(Wieght());
                 }, 'Weight', 'assets/icons/dumbbells.png'),
                 navButton(() {
                   Get.to(const Kick());
