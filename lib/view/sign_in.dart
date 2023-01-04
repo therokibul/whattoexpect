@@ -16,7 +16,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       body: SafeArea(
         child: isLoading
-            ? CircularProgressIndicator()
+            ? const Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -55,7 +55,15 @@ class _SignInState extends State<SignIn> {
                           ),
                           child: MaterialButton(
                             onPressed: () async {
+                              setState(() {
+                                isLoading = true;
+                              });
                               await AuthService().signWithGoogle();
+                              setState(() {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              });
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,

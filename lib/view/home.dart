@@ -7,6 +7,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     var currentUser = FirebaseAuth.instance.currentUser;
     var userName = currentUser?.displayName;
+    String? userPhoto = currentUser?.photoURL.toString();
 
     return Scaffold(
       body: Padding(
@@ -28,6 +29,17 @@ class Home extends StatelessWidget {
                 ),
                 background: SvgPicture.asset('assets/baby.svg'),
               ),
+              actions: [
+                InkWell(
+                  onTap: () {
+                    Get.to(const Profile());
+                  },
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage(userPhoto!),
+                  ),
+                )
+              ],
             ),
             SliverList(
               delegate: SliverChildListDelegate(
@@ -171,14 +183,16 @@ class Home extends StatelessWidget {
               crossAxisCount: 2,
               children: [
                 navButton(() {
-                  Get.to(Wieght());
-                }, 'Weight', 'assets/icons/dumbbells.png'),
+                  Get.to(const Wieght());
+                }, 'Weight', 'assets/icons/scale.png'),
                 navButton(() {
                   Get.to(const Kick());
-                }, 'Kick', 'assets/icons/footprints.png'),
-                navButton(() {}, 'Constaction', 'assets/avater.png'),
-                navButton(() {}, 'Ovilation', 'assets/avater.png'),
-                navButton(() {}, 'Memory', 'assets/avater.png'),
+                }, 'Kick', 'assets/icons/baby-feet.png'),
+                navButton(() {
+                  Get.to(Contraction());
+                }, 'Contraction', 'assets/icons/contraction.png'),
+                navButton(() {}, 'Ovulation', 'assets/icons/sperm.png'),
+                navButton(() {}, 'Memory', 'assets/icons/photos.png'),
               ],
             ),
           ],

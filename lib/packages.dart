@@ -22,6 +22,7 @@ export 'view/welcome.dart';
 export 'view/kick.dart';
 export 'view/profile.dart';
 export 'view/wieght.dart';
+export 'view/contraction.dart';
 export 'auth/auth.dart';
 export 'auth/auth_page.dart';
 
