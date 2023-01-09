@@ -59,6 +59,14 @@ class _SignInState extends State<SignIn> {
                                 isLoading = true;
                               });
                               await AuthService().signWithGoogle();
+                              FirebaseAuth.instance
+                                  .authStateChanges()
+                                  .listen((User? user) {
+                                if (user != null) {
+                                  Get.to(const Home());
+                                }
+                              });
+
                               setState(() {
                                 setState(() {
                                   isLoading = false;
