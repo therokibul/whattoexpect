@@ -45,6 +45,8 @@ dependencies:
   flutter_svg: ^1.1.6
   table_calendar: ^3.0.8
   google_sign_in: ^5.4.2
+  cloud_firestore: ^4.3.1
+  flutter_native_splash: ^2.2.16
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +58,24 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+
+# flutter_native_splash-development.yaml
+flutter_native_splash:
+  color: "#f7f6f1"
+  image: assets/Icon.png
+  branding: assets/Icon.png
+  color_dark: "#272727"
+  image_dark: assets/Icon.png
+  branding_dark: assets/Icon.png
+
+  android_12:
+    image: assets/Icon.png
+    icon_background_color: "#f7f6f1"
+    image_dark: assets/Icon.png
+    icon_background_color_dark: "#272727"
+
+  web: false
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

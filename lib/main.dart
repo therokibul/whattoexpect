@@ -1,6 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:whattoexpect/constants/colors.dart';
+import 'package:whattoexpect/features/authentication/screens/welcome_screen.dart';
 import 'package:whattoexpect/firebase_options.dart';
-import 'package:whattoexpect/packages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,34 +25,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'What To Expect',
-        theme: ThemeData(
-            // useMaterial3: true,
-            scaffoldBackgroundColor: Palette.scaffold,
-            primarySwatch: Palette.themeColor,
-            inputDecorationTheme: InputDecorationTheme(
-              fillColor: Colors.white,
-              filled: true,
-              focusedBorder: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: Colors.transparent, width: 2.0),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: Colors.transparent, width: 2.0),
-                borderRadius: BorderRadius.circular(10),
-              ),
+      debugShowCheckedModeBanner: false,
+      title: 'What To Expect',
+
+      theme: ThemeData(
+          brightness: Brightness.light,
+          primaryColor: Colors.pink,
+          inputDecorationTheme: const InputDecorationTheme(
+            border: OutlineInputBorder(),
+            prefixIconColor: secendaryColor,
+            floatingLabelStyle: TextStyle(color: secendaryColor),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 2, color: secendaryColor),
             ),
-            textTheme: Theme.of(context).textTheme.apply(
-                  bodyColor: Palette.darkColor,
-                  displayColor: Palette.darkColor,
-                ),
-            appBarTheme: const AppBarTheme(
-                backgroundColor: Palette.scaffold, elevation: 0)),
-        home: AuthPage()
-        // home: const Navbar(),
-        );
+          )),
+      darkTheme: ThemeData(brightness: Brightness.dark),
+      themeMode: ThemeMode.light,
+      defaultTransition: Transition.leftToRightWithFade,
+      transitionDuration: const Duration(microseconds: 5000),
+
+      home: const WelcomeScreen(),
+      // home: const Navbar(),
+    );
   }
 }

@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../utils/const.dart';
-import '../view/sign_in.dart';
+import 'package:whattoexpect/constants/colors.dart';
 
 class Button extends StatelessWidget {
   const Button({
     Key? key,
     required this.text,
     required this.color,
-    required this.onTap,
+    required this.onTap, required this.bgColor,
   }) : super(key: key);
   final String text;
   final Color color;
+  final Color bgColor;
   // final VoidCallbackAction onTap;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Palette.darkColor,
+      // width: double.infinity,
+      decoration:  BoxDecoration(
+        color: bgColor,
         borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),
