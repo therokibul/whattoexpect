@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whattoexpect/common%20widgets/button.dart';
+import 'package:whattoexpect/features/authentication/screens/forget_password_mail.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -59,7 +60,124 @@ class LoginScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return Container(
+                                      padding: const EdgeInsets.all(8),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Make Selection!',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline3,
+                                          ),
+                                          Text(
+                                            'Select one of the options given below to reset your password',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText2,
+                                          ),
+                                          const SizedBox(
+                                            height: 30,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Get.to(
+                                                  const ForgetPasswordMailScreen());
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.all(20),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Colors.grey.shade200),
+                                              child: Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.mail_outline_outlined,
+                                                    size: 60,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 30,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'E-Mail',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headline6,
+                                                      ),
+                                                      Text(
+                                                        'Reset via Mail Verification',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText2,
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 30,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: Container(
+                                              padding: const EdgeInsets.all(20),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Colors.grey.shade200,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons
+                                                        .phone_android_outlined,
+                                                    size: 60,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 30,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Phone Number',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headline6,
+                                                      ),
+                                                      Text(
+                                                        'Reset via Phone Verification',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText2,
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            },
                             child: const Text('Forget Password?')),
                       ),
                       Button(

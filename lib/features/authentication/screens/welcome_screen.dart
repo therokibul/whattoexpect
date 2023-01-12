@@ -59,7 +59,7 @@ class WelcomeScreen extends StatelessWidget {
                         text: 'Login',
                         color: Colors.white,
                         onTap: () {
-                          Get.off(const LoginScreen());
+                          Get.to(const LoginScreen());
                         },
                         bgColor: Colors.pink,
                       ),
@@ -71,7 +71,7 @@ class WelcomeScreen extends StatelessWidget {
                       text: 'Signup',
                       color: Colors.white,
                       onTap: () {
-                        Get.off(const SignUpScreen());
+                        Get.to(const SignUpScreen());
                       },
                       bgColor: darkColor,
                     ),

@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: ThemeMode.light,
       defaultTransition: Transition.leftToRightWithFade,
-      transitionDuration: const Duration(microseconds: 5000),
+      transitionDuration: const Duration(milliseconds: 500),
 
       home: const WelcomeScreen(),
       // home: const Navbar(),
