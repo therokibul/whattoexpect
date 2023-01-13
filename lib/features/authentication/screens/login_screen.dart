@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whattoexpect/common%20widgets/button.dart';
 import 'package:whattoexpect/features/authentication/screens/forget_password_mail.dart';
+import 'package:whattoexpect/features/core/screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -183,7 +184,9 @@ class LoginScreen extends StatelessWidget {
                       Button(
                           text: 'LOGIN',
                           color: Colors.white,
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const Home());
+                          },
                           bgColor: Colors.black)
                     ],
                   ),

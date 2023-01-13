@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whattoexpect/common%20widgets/button.dart';
+import 'package:whattoexpect/features/authentication/controllers/signup_controller.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignUpController());
+    final formKey = GlobalKey<FormState>();
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -27,12 +30,14 @@ class SignUpScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               Form(
+                key: formKey,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       TextFormField(
+                        controller: controller.fullName,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
                             Icons.person_outline_outlined,
@@ -45,6 +50,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 30,
                       ),
                       TextFormField(
+                        controller: controller.email,
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
@@ -58,6 +64,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 30,
                       ),
                       TextFormField(
+                        controller: controller.phoneNumber,
                         keyboardType: TextInputType.phone,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
@@ -71,6 +78,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 30,
                       ),
                       TextFormField(
+                        controller: controller.password,
                         obscureText: true,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
