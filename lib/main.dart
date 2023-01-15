@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:whattoexpect/constants/colors.dart';
-import 'package:whattoexpect/features/authentication/screens/welcome_screen.dart';
 import 'package:whattoexpect/firebase_options.dart';
+import 'package:whattoexpect/repository/authentication_repository/authentication_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
+  ).then((value) => Get.put(AuthController()));
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
 
-      home: const WelcomeScreen(),
+      home: const CircularProgressIndicator(),
       // home: const Navbar(),
     );
   }

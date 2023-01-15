@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whattoexpect/common%20widgets/button.dart';
+import 'package:whattoexpect/constants/text_strings.dart';
 import 'package:whattoexpect/features/authentication/controllers/signup_controller.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -8,8 +9,12 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignUpController());
+    // final controller = Get.put(SignUpController());
     final formKey = GlobalKey<FormState>();
+    final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _passwordController = TextEditingController();
+
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -37,7 +42,7 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       TextFormField(
-                        controller: controller.fullName,
+                        // controller: controller.fullName,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
                             Icons.person_outline_outlined,
@@ -50,7 +55,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 30,
                       ),
                       TextFormField(
-                        controller: controller.email,
+                        controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
@@ -64,7 +69,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 30,
                       ),
                       TextFormField(
-                        controller: controller.phoneNumber,
+                        // controller: controller.phoneNumber,
                         keyboardType: TextInputType.phone,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
@@ -78,7 +83,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 30,
                       ),
                       TextFormField(
-                        controller: controller.password,
+                        controller: _passwordController,
                         obscureText: true,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
@@ -97,15 +102,24 @@ class SignUpScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              // if (formKey.currentState!.validate()) {
+                              //   SignUpController.instance.registerUser(
+                              //       controller.email.text.trim(),
+                              //       controller.password.text.trim());
+                              // }
+                            },
                             child: const Text('Forget Password?')),
                       ),
                       SizedBox(
                         width: double.infinity,
                         child: Button(
-                            text: 'LOGIN',
+                            text: 'SIGN UP',
                             color: Colors.white,
-                            onTap: () {},
+                            onTap: () {
+                              authController.register(_emailController.text.trim(),
+                      _passwordController.text.trim());
+                            },
                             bgColor: Colors.black),
                       )
                     ],

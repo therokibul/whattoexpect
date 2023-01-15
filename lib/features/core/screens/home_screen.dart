@@ -1,10 +1,10 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:whattoexpect/features/todo/screens/todo_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
                 centerTitle: false,
                 title: Text(
                   'Hi, $userName',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                   // textScaleFactor: 2,
                 ),
                 background: SvgPicture.asset('assets/baby.svg'),
@@ -40,7 +40,7 @@ class Home extends StatelessWidget {
                   onTap: () {
                     // Get.to(const Profile());
                   },
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     radius: 20,
                     backgroundImage: AssetImage('assets/avater.png'),
                   ),
@@ -199,6 +199,9 @@ class Home extends StatelessWidget {
                 }, 'Contraction', 'assets/icons/contraction.png'),
                 navButton(() {}, 'Ovulation', 'assets/icons/sperm.png'),
                 navButton(() {}, 'Memory', 'assets/icons/photos.png'),
+                navButton(() {
+                  Get.to(const TodoList());
+                }, 'Todo List', 'assets/icons/photos.png'),
               ],
             ),
           ],
