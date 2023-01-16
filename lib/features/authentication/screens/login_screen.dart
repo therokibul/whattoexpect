@@ -3,14 +3,16 @@ import 'package:get/get.dart';
 import 'package:whattoexpect/common%20widgets/button.dart';
 import 'package:whattoexpect/constants/text_strings.dart';
 import 'package:whattoexpect/features/authentication/screens/forget_password_mail.dart';
-import 'package:whattoexpect/features/core/screens/home_screen.dart';
-
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+    final TextEditingController emailController = TextEditingController();
+
+    final TextEditingController passwordController = TextEditingController();
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -37,6 +39,7 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       TextFormField(
+                        controller: emailController,
                         decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.person_outline_outlined),
                             labelText: 'E-Mail',
@@ -47,6 +50,8 @@ class LoginScreen extends StatelessWidget {
                         height: 30,
                       ),
                       TextFormField(
+                        controller: passwordController,
+                        obscureText: true,
                         decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.fingerprint),
                             labelText: 'Password',
@@ -187,7 +192,8 @@ class LoginScreen extends StatelessWidget {
                           text: 'LOGIN',
                           color: Colors.white,
                           onTap: () {
-                            Get.to(const Home());
+                            authController.login(emailController.text.trim(),
+                                passwordController.text.trim());
                           },
                           bgColor: Colors.black)
                     ],

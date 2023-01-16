@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:whattoexpect/features/todo/screens/todo_screen.dart';
+import 'package:whattoexpect/features/weight/screens/wight_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -189,7 +190,7 @@ class Home extends StatelessWidget {
               crossAxisCount: 2,
               children: [
                 navButton(() {
-                  // Get.to( Wieght());
+                  Get.to(const WeightScreen());
                 }, 'Weight', 'assets/icons/scale.png'),
                 navButton(() {
                   // Get.to(const Kick());
@@ -201,7 +202,7 @@ class Home extends StatelessWidget {
                 navButton(() {}, 'Memory', 'assets/icons/photos.png'),
                 navButton(() {
                   Get.to(const TodoList());
-                }, 'Todo List', 'assets/icons/photos.png'),
+                }, 'Todo List', 'assets/icons/checklist.png'),
               ],
             ),
           ],

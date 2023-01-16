@@ -4,45 +4,38 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:whattoexpect/constants/text_strings.dart';
 import 'package:whattoexpect/features/authentication/screens/welcome_screen.dart';
 import 'package:whattoexpect/features/core/screens/home_screen.dart';
+import 'package:whattoexpect/features/todo/models/todo_model.dart';
 import 'package:whattoexpect/repository/exceptions/signup_email_password_failure.dart';
-
-
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
-  
+
   late Rx<GoogleSignInAccount?> googleSignInAccount;
 
   @override
   void onReady() {
     super.onReady();
-    // auth is comning from the constants.dart file but it is basically FirebaseAuth.instance. 
+    // auth is comning from the constants.dart file but it is basically FirebaseAuth.instance.
     // Since we have to use that many times I just made a constant file and declared there
-    
+
     firebaseUser = Rx<User?>(auth.currentUser);
     googleSignInAccount = Rx<GoogleSignInAccount?>(googleSign.currentUser);
-      
-      
+
     firebaseUser.bindStream(auth.userChanges());
     ever(firebaseUser, _setInitialScreen);
 
-    
     googleSignInAccount.bindStream(googleSign.onCurrentUserChanged);
     ever(googleSignInAccount, _setInitialScreenGoogle);
   }
 
   _setInitialScreen(User? user) {
     if (user == null) {
-        
       // if the user is not found then the user is navigated to the Register Screen
       Get.offAll(() => const WelcomeScreen());
-        
     } else {
-        
       // if the user exists and logged in the the user is navigated to the Home Screen
       Get.offAll(() => Home());
-        
     }
   }
 
@@ -87,8 +80,17 @@ class AuthController extends GetxController {
   void register(String email, password) async {
     try {
       await auth.createUserWithEmailAndPassword(
-          email: email, password: password);      
+          email: email, password: password);
     } catch (firebaseAuthException) {}
+    
+    // () async {
+    //                     final todoModel = TodoModel(
+    //                       content: contentTextEditorController.text.trim(),
+    //                       isDone: false,
+    //                     );
+    //                     await FirestoreDb.addTodo(todoModel);
+    //                     contentTextEditorController.clear();
+    //                   },
   }
 
   void login(String email, password) async {
@@ -101,8 +103,6 @@ class AuthController extends GetxController {
     await auth.signOut();
   }
 }
-
-
 
 // class AuthenticationRepository extends GetxController {
 //   static AuthenticationRepository get instance => Get.find();

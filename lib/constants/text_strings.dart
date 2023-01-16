@@ -11,3 +11,4 @@ final Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp();
 FirebaseAuth auth = FirebaseAuth.instance;
 FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 GoogleSignIn googleSign = GoogleSignIn();
+final uuid = auth.currentUser!.uid;

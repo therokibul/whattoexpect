@@ -1,109 +1,116 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:whattoexpect/features/todo/controllers/todo_models.dart';
-import 'package:whattoexpect/features/todo/db/firebase_db.dart';
-import 'package:whattoexpect/features/todo/models/todo_model.dart';
+import 'package:whattoexpect/features/todo/controllers/todo_controller.dart';
 
-class TodoList extends StatelessWidget {
-  const TodoList({super.key});
+class TodoList extends StatefulWidget {
+  const TodoList({Key? key}) : super(key: key);
+
+  @override
+  State<TodoList> createState() => _TodoListState();
+}
+
+class _TodoListState extends State<TodoList> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _taskController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final todoController = Get.put(TodoController());
-    TextEditingController contentTextEditorController = TextEditingController();
+    return GetBuilder<TodoController>(
+      init: TodoController(),
+      initState: (_) {},
+      builder: (todoController) {
+        todoController.getData();
 
-    return Scaffold(
-      body: ListView.builder(
-        itemCount: todoController.todos.length,
-        itemBuilder: (BuildContext context, int index) {
-          print(todoController.todos[index].content);
-          final todoModel = todoController.todos[index];
-          return Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 4,
-              vertical: 4,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.black26,
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      todoModel.content,
-                      style: TextStyle(
-                        fontSize: Get.textTheme.headline6!.fontSize,
-                        decoration: todoModel.isDone
-                            ? TextDecoration.lineThrough
-                            : TextDecoration.none,
-                      ),
-                    ),
-                  ),
-                  Checkbox(
-                    value: todoModel.isDone,
-                    onChanged: (status) {
-                      FirestoreDb.updateStatus(
-                        status!,
-                        todoModel.documentId,
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Todo List'),
+          ),
+          body: Center(
+            child: todoController.isLoading
+                ? const SizedBox(
+                    child: CircularProgressIndicator(),
+                  )
+                : ListView.builder(
+                    itemCount: todoController.taskList.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          leading: Checkbox(
+                              onChanged: (value) => todoController.addTodo(
+                                  todoController.taskList[index].task,
+                                  !todoController.taskList[index].isDone,
+                                  todoController.taskList[index].id),
+                              value: todoController.taskList[index].isDone),
+                          title: Text(todoController.taskList[index].task),
+                          trailing: SizedBox(
+                            width: 100,
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () => addTaskDialog(
+                                      todoController,
+                                      'Update Task',
+                                      todoController.taskList[index].id,
+                                      todoController.taskList[index].task),
+                                  icon: const Icon(Icons.edit),
+                                ),
+                                IconButton(
+                                  onPressed: () => todoController.deleteTask(
+                                      todoController.taskList[index].id),
+                                  icon: const Icon(Icons.delete),
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       );
                     },
                   ),
-                  IconButton(
-                    onPressed: () {
-                      FirestoreDb.deleteTodo(todoModel.documentId!);
-                    },
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.redAccent,
-                    ),
-                  ),
-                ],
-              ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () async =>
+                await addTaskDialog(todoController, 'Add Todo', '', ''),
+          ),
+        );
+      },
+    );
+  }
+
+  addTaskDialog(TodoController todoController, String title, String id,
+      String task) async {
+    if (task.isNotEmpty) {
+      _taskController.text = task;
+    }
+
+    Get.defaultDialog(
+      title: title,
+      content: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            TextFormField(
+              controller: _taskController,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Cannot be empty';
+                }
+                return null;
+              },
             ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.bottomSheet(
-            Container(
-              height: 150,
-              color: Colors.grey.shade100,
-              child: Column(
-                children: [
-                  TextField(
-                    controller: contentTextEditorController,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final todoModel = TodoModel(
-                        content: contentTextEditorController.text.trim(),
-                        isDone: false,
-                      );
-                      await FirestoreDb.addTodo(todoModel);
-                      contentTextEditorController.clear();
-                    },
-                    child: const Text(
-                      "Add Todo",
-                    ),
-                  ),
-                ],
-              ),
+            ElevatedButton(
+              onPressed: () async {
+                await todoController.addTodo(
+                    _taskController.text.trim(), false, id);
+
+                _taskController.clear();
+                Get.back();
+              },
+              child: const Text('Save'),
             ),
-            barrierColor: Colors.red[50],
-            isDismissible: false,
-            // shape: RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.circular(35),
-            //     side: const BorderSide(width: 5, color: Colors.black)),
-            enableDrag: false,
-          );
-        },
+          ],
+        ),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:whattoexpect/constants/colors.dart';
 import 'package:whattoexpect/firebase_options.dart';
 import 'package:whattoexpect/repository/authentication_repository/authentication_repository.dart';
+import 'package:whattoexpect/utils/controller_binding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: Colors.pink,
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink),
+          useMaterial3: true,
           inputDecorationTheme: const InputDecorationTheme(
             border: OutlineInputBorder(),
             prefixIconColor: secendaryColor,
@@ -46,6 +49,7 @@ class MyApp extends StatelessWidget {
 
       home: const CircularProgressIndicator(),
       // home: const Navbar(),
+      initialBinding: ControllerBrindings(),
     );
   }
 }

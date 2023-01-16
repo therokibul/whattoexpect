@@ -2,9 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TaskModel {
-  String id, task;
+class WeightModel {
+  String id, weight;
   bool isDone;
+  DateTime date;
 
-  TaskModel(this.id, this.task, this.isDone);
+  WeightModel(this.id, this.weight, this.isDone, this.date);
 }
