@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:whattoexpect/features/todo/screens/todo_screen.dart';
-import 'package:whattoexpect/features/weight/screens/wight_screen.dart';
+import 'package:whattoexpect/features/weight/screens/weight_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
