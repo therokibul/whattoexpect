@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:whattoexpect/constants/text_strings.dart';
 
 class WeightScreen extends StatefulWidget {
@@ -13,15 +14,16 @@ class WeightScreen extends StatefulWidget {
 class _WeightScreenState extends State<WeightScreen> {
   @override
   Widget build(BuildContext context) {
-    Timestamp stamp = Timestamp.now();
-    DateTime date = stamp.toDate();
+    // Timestamp stamp = Timestamp.now();
+    // DateTime date = stamp.toDate();
+ 
 
     DocumentReference<Map<String, dynamic>> users = FirebaseFirestore.instance
         .collection('users')
         .doc(uuid)
         .collection('wieght')
         .doc();
-
+    TextEditingController weightController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Weight Tracker'),
@@ -47,11 +49,10 @@ class _WeightScreenState extends State<WeightScreen> {
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
-                final Timestamp dateCreated = data["date"];
-                final DateTime date = dateCreated.toDate();
+
                 return ListTile(
                   title: Text(data['weight'] + ' KG'),
-                  subtitle: Text(date.toString()),
+                  subtitle: Text(data['date']),
                 );
               }).toList(),
             );
@@ -63,17 +64,24 @@ class _WeightScreenState extends State<WeightScreen> {
               child: Column(
                 children: [
                   const Text('Add your Weight'),
-                  const TextField(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: weightController,
+                    ),
+                  ),
                   MaterialButton(
-                    onPressed: () {
-                      users
+                    color: Colors.pink,
+                    onPressed: () async {
+                      await users
                           .set({
-                            'weight': '28',
-                            'date': date,
+                            'weight': weightController.text.trim(),
+                            'date': formattedDate,
                           })
-                          .then((value) => print(date))
+                          .then((value) => print(formattedDate))
                           .catchError(
                               (error) => print("Failed to add user: $error"));
+                      Get.back();
                     },
                     child: const Text('Add'),
                   )
@@ -81,7 +89,7 @@ class _WeightScreenState extends State<WeightScreen> {
               ),
             ),
             backgroundColor: Colors.white)),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
 
       //  IconButton(

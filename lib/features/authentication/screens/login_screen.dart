@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:whattoexpect/common%20widgets/button.dart';
 import 'package:whattoexpect/constants/text_strings.dart';
 import 'package:whattoexpect/features/authentication/screens/forget_password_mail.dart';
+import 'package:whattoexpect/features/authentication/screens/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -201,7 +202,9 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(const SignUpScreen());
+                },
                 child: Text.rich(
                   TextSpan(
                       text: 'Don\'t have an Account? ',

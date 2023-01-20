@@ -4,6 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:whattoexpect/features/contraction/contraction.dart';
+import 'package:whattoexpect/features/kick/kick_screen.dart';
+import 'package:whattoexpect/features/profile/profile.dart';
 import 'package:whattoexpect/features/todo/screens/todo_screen.dart';
 import 'package:whattoexpect/features/weight/screens/weight_screen.dart';
 
@@ -39,7 +42,7 @@ class Home extends StatelessWidget {
               actions: [
                 InkWell(
                   onTap: () {
-                    // Get.to(const Profile());
+                    Get.to(const Profile());
                   },
                   child: const CircleAvatar(
                     radius: 20,
@@ -193,10 +196,10 @@ class Home extends StatelessWidget {
                   Get.to(const WeightScreen());
                 }, 'Weight', 'assets/icons/scale.png'),
                 navButton(() {
-                  // Get.to(const Kick());
+                  Get.to(const KickScreen());
                 }, 'Kick', 'assets/icons/baby-feet.png'),
                 navButton(() {
-                  // Get.to(Contraction());
+                  Get.to(const ContractionScreen());
                 }, 'Contraction', 'assets/icons/contraction.png'),
                 navButton(() {}, 'Ovulation', 'assets/icons/sperm.png'),
                 navButton(() {}, 'Memory', 'assets/icons/photos.png'),

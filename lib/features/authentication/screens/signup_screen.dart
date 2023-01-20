@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whattoexpect/common%20widgets/button.dart';
 import 'package:whattoexpect/constants/text_strings.dart';
-import 'package:whattoexpect/features/authentication/controllers/signup_controller.dart';
+import 'package:whattoexpect/features/authentication/screens/login_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -11,9 +11,10 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // final controller = Get.put(SignUpController());
     final formKey = GlobalKey<FormState>();
-    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
 
-  final TextEditingController _passwordController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+    DateTime selectedDate = DateTime.now();
 
     return SafeArea(
       child: Scaffold(
@@ -55,7 +56,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 30,
                       ),
                       TextFormField(
-                        controller: _emailController,
+                        controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
@@ -83,7 +84,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 30,
                       ),
                       TextFormField(
-                        controller: _passwordController,
+                        controller: passwordController,
                         obscureText: true,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
@@ -96,20 +97,22 @@ class SignUpScreen extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
+                      ListTile(
+                        onTap: (() {
+                          showDatePicker(
+                              context: context,
+                              initialDate: selectedDate,
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2100));
+                        }),
+                        title: const Text('Last period started'),
+                        trailing: const Icon(
+                          Icons.calendar_month_outlined,
+                          color: Colors.pink,
+                        ),
+                      ),
                       const SizedBox(
                         height: 10,
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                            onPressed: () {
-                              // if (formKey.currentState!.validate()) {
-                              //   SignUpController.instance.registerUser(
-                              //       controller.email.text.trim(),
-                              //       controller.password.text.trim());
-                              // }
-                            },
-                            child: const Text('Forget Password?')),
                       ),
                       SizedBox(
                         width: double.infinity,
@@ -117,8 +120,9 @@ class SignUpScreen extends StatelessWidget {
                             text: 'SIGN UP',
                             color: Colors.white,
                             onTap: () {
-                              authController.register(_emailController.text.trim(),
-                      _passwordController.text.trim());
+                              authController.register(
+                                  emailController.text.trim(),
+                                  passwordController.text.trim());
                             },
                             bgColor: Colors.black),
                       )
@@ -127,7 +131,9 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(const LoginScreen());
+                },
                 child: Text.rich(
                   TextSpan(
                       text: 'Already have an Account? ',
