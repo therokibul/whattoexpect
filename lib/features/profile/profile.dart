@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:whattoexpect/constants/text_strings.dart';
 import 'package:whattoexpect/repository/authentication_repository/authentication_repository.dart';
+import 'package:intl/intl.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -9,63 +10,68 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
-      body: StreamBuilder<QuerySnapshot>(
+        appBar: AppBar(
+          title: const Text('Profile'),
+        ),
+        body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('users')
               .doc(uuid)
-              .collection('user')
-              
+              .collection('info')
+              .doc('user')
               .snapshots(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return const Text('Something went wrong');
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const CircularProgressIndicator();
             }
+            var data = snapshot.data;
+            Timestamp timestamp = data!['lastPeriod'];
+            DateTime dateTime = timestamp.toDate();
+            DateTime newTime = dateTime.add(const Duration(days: 280));
+            var formatter = DateFormat('dd-MM-yyyy');
 
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            return Center(
-              child: Column(
-                children: [
-                  Card(
-                    child: Column(
-                      children: [
-                        Text(
-                          'Personalization',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        const ListTile(
-                          title: Text('Name'),
-                          trailing: Text('Aishwariya Farahi'),
-                        ),
-                        const ListTile(
-                          title: Text('Due Date'),
-                          trailing: Text('15-sep-2023'),
-                        ),
-                      ],
+            String dueDate = formatter.format(newTime);
+            return SafeArea(
+              child: Center(
+                child: Column(
+                  children: [
+                    Card(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Personalization',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          const SizedBox(
+                            height: 25,
+                          ),
+                          ListTile(
+                            title: const Text('name'),
+                            trailing: Text(data['name']),
+                          ),
+                          ListTile(
+                            title: const Text('Due Date'),
+                            trailing: Text(dueDate),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      leading: const Icon(Icons.logout_outlined),
-                      title: const Text('LogOut'),
-                      onTap: () {
-                        AuthController().signOut();
-                      },
-                    ),
-                  )
-                ],
+                    Card(
+                      child: ListTile(
+                        leading: const Icon(Icons.logout_outlined),
+                        title: const Text('LogOut'),
+                        onTap: () {
+                          AuthController().signOut();
+                        },
+                      ),
+                    )
+                  ],
+                ),
               ),
             );
-          }),
-    );
+          },
+        ));
   }
 }
+
+

@@ -1,4 +1,4 @@
-List<DateTime> _getTrimesterDates(DateTime selectedDate) {
+List<DateTime> getTrimesterDates(DateTime selectedDate) {
   // Assume a typical pregnancy lasts 280 days (40 weeks)
   var startDate = selectedDate;
   var endDate = selectedDate.add(const Duration(days: 280));
