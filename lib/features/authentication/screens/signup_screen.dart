@@ -29,11 +29,11 @@ class SignUpScreen extends StatelessWidget {
                   child: const Image(image: AssetImage('assets/welcome.png'))),
               Text(
                 'Welcome ',
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
               Text(
                 'Create your profile to start your journey',
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Form(
                 key: formKey,
@@ -43,19 +43,6 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       TextFormField(
-                        // controller: controller.fullName,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.person_outline_outlined,
-                          ),
-                          labelText: 'Full Name',
-                          hintText: 'Full Name',
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      TextFormField(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
@@ -64,20 +51,6 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           labelText: 'E-Mail',
                           hintText: 'E-Mail',
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      TextFormField(
-                        // controller: controller.phoneNumber,
-                        keyboardType: TextInputType.phone,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.numbers,
-                          ),
-                          labelText: 'Phone Number',
-                          hintText: 'Phone Number',
                         ),
                       ),
                       const SizedBox(
@@ -97,29 +70,15 @@ class SignUpScreen extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
-                      ListTile(
-                        onTap: (() {
-                          showDatePicker(
-                              context: context,
-                              initialDate: selectedDate,
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2100));
-                        }),
-                        title: const Text('Last period started'),
-                        trailing: const Icon(
-                          Icons.calendar_month_outlined,
-                          color: Colors.pink,
-                        ),
-                      ),
                       const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         width: double.infinity,
                         child: Button(
-                            text: 'SIGN UP',
+                            text: 'NEXT',
                             color: Colors.white,
-                            onTap: () {
+                            onTap: () async {
                               authController.register(
                                   emailController.text.trim(),
                                   passwordController.text.trim());
@@ -137,7 +96,7 @@ class SignUpScreen extends StatelessWidget {
                 child: Text.rich(
                   TextSpan(
                       text: 'Already have an Account? ',
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyMedium,
                       children: const [
                         TextSpan(
                           text: 'Login',

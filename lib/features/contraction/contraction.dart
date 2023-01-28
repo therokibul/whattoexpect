@@ -22,13 +22,15 @@ class _ContractionScreenState extends State<ContractionScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contraction Tracker'),
+        title: const Text(
+          'Contraction Tracker',
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('users')
               .doc(uuid)
-              .collection('kick')
+              .collection('contraction')
               .orderBy('date')
               .snapshots(),
           builder:

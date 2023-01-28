@@ -4,8 +4,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:whattoexpect/constants/text_strings.dart';
 import 'package:whattoexpect/features/authentication/screens/welcome_screen.dart';
 import 'package:whattoexpect/features/core/screens/home_screen.dart';
-import 'package:whattoexpect/features/todo/models/todo_model.dart';
-import 'package:whattoexpect/repository/exceptions/signup_email_password_failure.dart';
+
+import '../../features/authentication/screens/user_info.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -35,7 +35,7 @@ class AuthController extends GetxController {
       Get.offAll(() => const WelcomeScreen());
     } else {
       // if the user exists and logged in the the user is navigated to the Home Screen
-      Get.offAll(() => Home());
+      Get.offAll(() => const Home());
     }
   }
 
@@ -46,7 +46,7 @@ class AuthController extends GetxController {
       Get.offAll(() => const WelcomeScreen());
     } else {
       // if the user exists and logged in the the user is navigated to the Home Screen
-      Get.offAll(() => Home());
+      Get.offAll(() => const Home());
     }
   }
 
@@ -79,24 +79,20 @@ class AuthController extends GetxController {
 
   void register(String email, password) async {
     try {
-      await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-    } catch (firebaseAuthException) {}
-    
-    // () async {
-    //                     final todoModel = TodoModel(
-    //                       content: contentTextEditorController.text.trim(),
-    //                       isDone: false,
-    //                     );
-    //                     await FirestoreDb.addTodo(todoModel);
-    //                     contentTextEditorController.clear();
-    //                   },
+      await auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => Get.to(const UserInfoScreen()));
+    } catch (firebaseAuthException) {
+      Get.snackbar('Error', firebaseAuthException.toString());
+    }
   }
 
   void login(String email, password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
-    } catch (firebaseAuthException) {}
+    } catch (firebaseAuthException) {
+      Get.snackbar('Error', firebaseAuthException.toString());
+    }
   }
 
   void signOut() async {

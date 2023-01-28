@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:whattoexpect/constants/text_strings.dart';
 import 'package:whattoexpect/repository/authentication_repository/authentication_repository.dart';
 
 class Profile extends StatelessWidget {
@@ -10,42 +12,60 @@ class Profile extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Profile'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Card(
+      body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('users')
+              .doc(uuid)
+              .collection('user')
+              
+              .snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return const Text('Something went wrong');
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            return Center(
               child: Column(
                 children: [
-                  Text(
-                    'Personalization',
-                    style: Theme.of(context).textTheme.titleLarge,
+                  Card(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Personalization',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        const ListTile(
+                          title: Text('Name'),
+                          trailing: Text('Aishwariya Farahi'),
+                        ),
+                        const ListTile(
+                          title: Text('Due Date'),
+                          trailing: Text('15-sep-2023'),
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  const ListTile(
-                    title: Text('Name'),
-                    trailing: Text('Aishwariya Farahi'),
-                  ),
-                  const ListTile(
-                    title: Text('Due Date'),
-                    trailing: Text('15-sep-2023'),
-                  ),
+                  Card(
+                    child: ListTile(
+                      leading: const Icon(Icons.logout_outlined),
+                      title: const Text('LogOut'),
+                      onTap: () {
+                        AuthController().signOut();
+                      },
+                    ),
+                  )
                 ],
               ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.logout_outlined),
-                title: const Text('LogOut'),
-                onTap: () {
-                  AuthController().signOut();
-                },
-              ),
-            )
-          ],
-        ),
-      ),
+            );
+          }),
     );
   }
 }

@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: Colors.pink,
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink),
+          // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink),
           useMaterial3: true,
           inputDecorationTheme: const InputDecorationTheme(
             border: OutlineInputBorder(),
