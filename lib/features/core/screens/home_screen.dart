@@ -38,8 +38,13 @@ class Home extends StatelessWidget {
         DateTime dateTime = timestamp.toDate();
         DateTime newTime = dateTime.add(const Duration(days: 280));
         var formatter = DateFormat('dd-MM-yyyy');
-
         String dueDate = formatter.format(newTime);
+        DateTime selectedDate = dateTime;
+        DateTime currentDate = DateTime.now();
+
+        Duration difference = currentDate.difference(selectedDate);
+        int weeks = difference.inDays ~/ 7;
+        print(weeks);
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03),
           child: CustomScrollView(
@@ -86,35 +91,6 @@ class Home extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 80,
-                                height: 80,
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    // color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(40)),
-                                child: Lottie.asset(
-                                  'assets/animation/baby.json',
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                children: const [
-                                  Text(
-                                    '26 Week',
-                                    style: TextStyle(color: Colors.white),
-                                    textScaleFactor: 2,
-                                  ),
-                                  // Text('Your baby is now the size of a gourd'),
-                                ],
-                              )
-                            ],
-                          ),
-                          const Divider(),
                           Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -134,53 +110,35 @@ class Home extends StatelessWidget {
                               ),
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Column(
-                                  children: const [
-                                    Text(
-                                      'Height',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    Text(
-                                      '35 cm',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
+                                Container(
+                                  width: 80,
+                                  height: 80,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      // color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(40)),
+                                  child: Lottie.asset(
+                                    'assets/animation/baby.json',
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
                                 ),
                                 Column(
-                                  children: const [
+                                  children: [
                                     Text(
-                                      'weight',
-                                      style: TextStyle(color: Colors.white),
+                                      '$weeks Week',
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      textScaleFactor: 2,
                                     ),
-                                    Text(
-                                      '910 gram',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
+                                    // Text('Your baby is now the size of a gourd'),
                                   ],
-                                ),
-                                Column(
-                                  children: const [
-                                    Text(
-                                      'Week Left',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    Text(
-                                      '14 weeks',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
+                                )
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
