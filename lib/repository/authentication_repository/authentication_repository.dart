@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -81,6 +82,15 @@ class AuthController extends GetxController {
     try {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
+          .whenComplete(() => FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(uuid)
+                  .collection('info')
+                  .doc('user')
+                  .set({
+                'name': 'nameController.text',
+                'phone': 'phoneController.text.trim()',
+              }))
           .then((value) => Get.to(const UserInfoScreen()));
     } catch (firebaseAuthException) {
       Get.snackbar('Error', firebaseAuthException.toString());
