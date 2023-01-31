@@ -14,6 +14,8 @@ import 'package:whattoexpect/features/todo/screens/todo_screen.dart';
 import 'package:whattoexpect/features/weight/screens/weight_screen.dart';
 import 'package:intl/intl.dart';
 
+import '../../ovulation/screen/ovulation.dart';
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -182,10 +184,13 @@ class Home extends StatelessWidget {
                   navButton(() {
                     Get.to(const ContractionScreen());
                   }, 'Contraction', 'assets/icons/contraction.png'),
-                  navButton(() {}, 'Ovulation', 'assets/icons/sperm.png'),
+                  navButton(() {
+                    Get.to(() =>  OvulationCalculator());
+                  }, 'Ovulation', 'assets/icons/sperm.png'),
+                  navButton(() {}, 'Memory', 'assets/icons/photos.png'),
                   navButton(() {
                     Get.to(() => const TrimesterCalendar());
-                  }, 'Memory', 'assets/icons/photos.png'),
+                  }, 'Memory', 'assets/icons/calendar.png'),
                   navButton(() {
                     Get.to(const TodoList());
                   }, 'Todo List', 'assets/icons/checklist.png'),
