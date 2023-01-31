@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 import 'package:whattoexpect/constants/text_strings.dart';
 import 'package:whattoexpect/features/contraction/contraction.dart';
 import 'package:whattoexpect/features/kick/kick_screen.dart';
+import 'package:whattoexpect/features/trimester_calender/trimester_calendar.dart';
 import 'package:whattoexpect/features/profile/profile.dart';
 import 'package:whattoexpect/features/todo/screens/todo_screen.dart';
 import 'package:whattoexpect/features/weight/screens/weight_screen.dart';
@@ -182,7 +183,9 @@ class Home extends StatelessWidget {
                     Get.to(const ContractionScreen());
                   }, 'Contraction', 'assets/icons/contraction.png'),
                   navButton(() {}, 'Ovulation', 'assets/icons/sperm.png'),
-                  navButton(() {}, 'Memory', 'assets/icons/photos.png'),
+                  navButton(() {
+                    Get.to(() => const TrimesterCalendar());
+                  }, 'Memory', 'assets/icons/photos.png'),
                   navButton(() {
                     Get.to(const TodoList());
                   }, 'Todo List', 'assets/icons/checklist.png'),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +22,7 @@ class _LastPririodScreenState extends State<LastPririodScreen> {
     // final controller = Get.put(SignUpController());
     final formKey = GlobalKey<FormState>();
 
-    DateTime selectedDate = DateTime.now();
+    late DateTime? selectedDate;
     DocumentReference<Map<String, dynamic>> users = FirebaseFirestore.instance
         .collection('users')
         .doc(uuid)
@@ -61,24 +63,18 @@ class _LastPririodScreenState extends State<LastPririodScreen> {
                                 ),
                                 ListTile(
                                   onTap: (() async {
-                                    final DateTime? picked =
-                                        await showDatePicker(
+                                    selectedDate = await showDatePicker(
                                       context: context,
                                       initialDate: DateTime.now(),
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2100),
                                     );
-                                    if (picked != null) {
-                                      setState(() {
-                                        selectedDate = picked;
-                                        var formatter =
-                                            DateFormat('dd-MM-yyyy');
-                                        formattedTime = DateFormat('kk:mm:a')
-                                            .format(selectedDate);
-                                        formattedDate =
-                                            formatter.format(selectedDate);
-                                      });
-                                    }
+                                    // if (picked != null) {
+                                    //   setState(() {
+                                    //     selectedDate = picked;
+                                    //
+                                    //   });
+                                    // }
                                   }),
                                   title: const Text('Last period started'),
                                   trailing: const Icon(
@@ -97,8 +93,11 @@ class _LastPririodScreenState extends State<LastPririodScreen> {
                                       onTap: () async {
                                         await users.update({
                                           'lastPeriod': selectedDate,
-                                        }).then(
-                                            (value) => Get.to(const Home()));
+                                        }).whenComplete(
+                                          () => Get.to(
+                                            () => Home(),
+                                          ),
+                                        );
                                       },
                                       bgColor: Colors.black),
                                 )

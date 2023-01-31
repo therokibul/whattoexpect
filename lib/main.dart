@@ -11,7 +11,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  ).then((value) => Get.put(AuthController()));
+  )
+  .then(
+    (value) => Get.put(
+      AuthController(),
+    ),
+  )
+  ;
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -30,18 +36,19 @@ class MyApp extends StatelessWidget {
       title: 'What To Expect',
 
       theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: Colors.pink,
-          // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink),
-          useMaterial3: true,
-          inputDecorationTheme: const InputDecorationTheme(
-            border: OutlineInputBorder(),
-            prefixIconColor: secendaryColor,
-            floatingLabelStyle: TextStyle(color: secendaryColor),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 2, color: secendaryColor),
-            ),
-          )),
+        brightness: Brightness.light,
+        primaryColor: Colors.pink,
+        // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink),
+        useMaterial3: true,
+        inputDecorationTheme: const InputDecorationTheme(
+          border: OutlineInputBorder(),
+          prefixIconColor: secendaryColor,
+          floatingLabelStyle: TextStyle(color: secendaryColor),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 2, color: secendaryColor),
+          ),
+        ),
+      ),
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: ThemeMode.light,
       defaultTransition: Transition.leftToRightWithFade,

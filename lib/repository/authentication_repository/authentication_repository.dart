@@ -88,8 +88,9 @@ class AuthController extends GetxController {
                   .collection('info')
                   .doc('user')
                   .set({
-                'name': 'nameController.text',
-                'phone': 'phoneController.text.trim()',
+                'name': 'name',
+                'phone': 'phone',
+                'lastPeriod': DateTime.now(),
               }))
           .then((value) => Get.to(const UserInfoScreen()));
     } catch (firebaseAuthException) {
