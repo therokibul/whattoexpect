@@ -75,6 +75,12 @@ class _NoteScreenState extends State<NoteScreen> {
                             child: ListTile(
                               title: Text(data['text']),
                               subtitle: Text('$date $formattedTime'),
+                              trailing: IconButton(
+                                  onPressed: () {
+                                    deleteNote(
+                                        snapshot.data!.docs[index].reference);
+                                  },
+                                  icon: const Icon(Icons.delete)),
                             ),
                           );
                         }
@@ -96,5 +102,11 @@ class _NoteScreenState extends State<NoteScreen> {
         child: const Icon(Icons.save),
       ),
     );
+  }
+
+  void deleteNote(DocumentReference noteRef) {
+    noteRef.delete().catchError((error) {
+      print("Error deleting note: $error");
+    });
   }
 }
