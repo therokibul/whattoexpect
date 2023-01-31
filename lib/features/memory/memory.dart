@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -60,6 +61,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
             .collection('users')
             .doc(uuid)
             .collection('images')
+            .orderBy('timestamp')
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -77,9 +79,14 @@ class _GalleryScreenState extends State<GalleryScreen> {
             itemBuilder: (context, index) {
               var document = snapshot.data!.docs[index];
               var url = document['url'];
-              return ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  child: Image.network(url));
+              return Card(
+                child: CachedNetworkImage(
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  imageUrl: url,
+                  // child: Image.network(url)
+                ),
+              );
             },
           );
         },
