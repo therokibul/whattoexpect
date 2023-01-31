@@ -16,6 +16,7 @@ import 'package:whattoexpect/features/weight/screens/weight_screen.dart';
 import 'package:intl/intl.dart';
 
 import '../../journal/journal.dart';
+import '../../memory/memory.dart';
 import '../../ovulation/screen/ovulation.dart';
 
 class Home extends StatelessWidget {
@@ -195,7 +196,9 @@ class Home extends StatelessWidget {
                   navButton(() {
                     Get.to(() => const OvulationCalculator());
                   }, 'Ovulation', 'assets/icons/sperm.png'),
-                  navButton(() {}, 'Memory', 'assets/icons/photos.png'),
+                  navButton(() {
+                    Get.to(() => GalleryScreen());
+                  }, 'Memory', 'assets/icons/photos.png'),
                   navButton(() {
                     Get.to(() => const NoteScreen());
                   }, 'Journal', 'assets/icons/journal.png'),

@@ -52,6 +52,8 @@ dependencies:
   scrollable_clean_calendar: ^1.4.0
   google_fonts: ^4.0.1
   firebase_storage: ^11.0.10
+  image_picker: ^0.8.6+1
+  cached_network_image: ^3.2.3
 
 
 
