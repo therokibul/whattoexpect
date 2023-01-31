@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:whattoexpect/constants/colors.dart';
 
 class Button extends StatelessWidget {
   const Button({
     Key? key,
     required this.text,
     required this.color,
-    required this.onTap, required this.bgColor,
+    required this.onTap,
+    required this.bgColor,
   }) : super(key: key);
   final String text;
   final Color color;
@@ -18,9 +17,9 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // width: double.infinity,
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
       ),

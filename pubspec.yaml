@@ -50,6 +50,7 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
 
   scrollable_clean_calendar: ^1.4.0
+  google_fonts: ^4.0.1
 
 
 
