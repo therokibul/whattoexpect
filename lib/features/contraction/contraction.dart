@@ -55,7 +55,7 @@ class _ContractionScreenState extends State<ContractionScreen> {
                   ),
                   Button(
                     text: 'Contraction',
-                    color: Colors.white,
+                    color: Colors.black,
                     onTap: () {
                       users
                           .set({
@@ -65,7 +65,7 @@ class _ContractionScreenState extends State<ContractionScreen> {
                           .then((value) => print(formattedTime))
                           .catchError((error) => print("$error"));
                     },
-                    bgColor: Colors.pink,
+                    bgColor: const Color(0xffe3faff),
                   ),
                   Expanded(
                     child: ListView(

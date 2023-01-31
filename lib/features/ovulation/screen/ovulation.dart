@@ -39,7 +39,7 @@ class _OvulationCalculatorState extends State<OvulationCalculator> {
             height: Get.height * 0.35,
           ),
           MaterialButton(
-            color: Colors.pinkAccent,
+            color: const Color(0xffe3faff),
             onPressed: () => _selectDate(context),
             child: const Text('Select Date'),
           ),
@@ -107,7 +107,7 @@ class _OvulationCalculatorState extends State<OvulationCalculator> {
   String calculateFertileWindow(DateTime date) {
     // Assume average cycle length of 28 days
     int cycleLength = 28;
-    return '${DateFormat.yMd().format(date.subtract(Duration(days: cycleLength ~/ 2 - 2)))} to ${DateFormat.yMd().format(date.add(Duration(days: cycleLength ~/ 2 + 2)))}';
+    return '${DateFormat.yMd().format(date.add(Duration(days: cycleLength ~/ 2 - 2)))} to ${DateFormat.yMd().format(date.add(Duration(days: cycleLength ~/ 2 + 2)))}';
   }
 
   String calculateNextPeriod(DateTime date) {

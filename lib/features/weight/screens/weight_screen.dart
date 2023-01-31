@@ -16,7 +16,6 @@ class _WeightScreenState extends State<WeightScreen> {
   Widget build(BuildContext context) {
     // Timestamp stamp = Timestamp.now();
     // DateTime date = stamp.toDate();
- 
 
     DocumentReference<Map<String, dynamic>> users = FirebaseFirestore.instance
         .collection('users')
@@ -71,7 +70,7 @@ class _WeightScreenState extends State<WeightScreen> {
                     ),
                   ),
                   MaterialButton(
-                    color: Colors.pink,
+                    color: const Color(0xffe3faff),
                     onPressed: () async {
                       await users
                           .set({

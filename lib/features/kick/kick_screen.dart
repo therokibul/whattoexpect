@@ -50,7 +50,7 @@ class _KickScreenState extends State<KickScreen> {
                   ),
                   Button(
                     text: 'Kick',
-                    color: Colors.white,
+                    color: Colors.black,
                     onTap: () {
                       users
                           .set({
@@ -60,7 +60,7 @@ class _KickScreenState extends State<KickScreen> {
                           .then((value) => print(formattedTime))
                           .catchError((error) => print("$error"));
                     },
-                    bgColor: Colors.pink,
+                    bgColor: const Color(0xffe3faff),
                   ),
                   Expanded(
                     child: ListView(
