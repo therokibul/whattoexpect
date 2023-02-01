@@ -14,7 +14,8 @@ FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 GoogleSignIn googleSign = GoogleSignIn();
 final uuid = auth.currentUser!.uid;
 
-   var now = DateTime.now();
-    var formatter = DateFormat('dd-MM-yyyy');
-    String formattedTime = DateFormat('kk:mm:a').format(now);
-    String formattedDate = formatter.format(now);
+var now = DateTime.now();
+var formatter = DateFormat('dd-MM-yyyy');
+String formattedTime = DateFormat('kk:mm:a').format(now);
+String formattedDate = formatter.format(now);
+

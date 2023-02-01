@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:whattoexpect/constants/text_strings.dart';
 import 'package:whattoexpect/features/contraction/contraction.dart';
+import 'package:whattoexpect/features/info/screens/info.dart';
 
 import 'package:whattoexpect/features/kick/kick_screen.dart';
 import 'package:whattoexpect/features/trimester_calender/trimester_calendar.dart';
@@ -87,6 +88,70 @@ class Home extends StatelessWidget {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
+                    Container(
+                      width: double.infinity,
+                      // height: Get.height * 0.2,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xff73c9c6),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.white.withOpacity(0.6),
+                                  Colors.white.withOpacity(0.3),
+                                ],
+                                begin: AlignmentDirectional.topStart,
+                                end: AlignmentDirectional.bottomEnd,
+                              ),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                              border: Border.all(
+                                width: 1.5,
+                                color: Colors.white.withOpacity(0.2),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 80,
+                                  height: 80,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      // color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(40)),
+                                  child: Lottie.asset(
+                                    'assets/animation/baby.json',
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      '$weeks Week',
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      textScaleFactor: 2,
+                                    ),
+                                    // Text('Your baby is now the size of a gourd'),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.02,
+                    ),
                     InkWell(
                       onTap: () {
                         Get.to(() => const TrimesterCalendar());
@@ -96,85 +161,20 @@ class Home extends StatelessWidget {
                         // height: Get.height * 0.2,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: const Color(0xff73c9c6),
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.white.withOpacity(0.6),
-                                    Colors.white.withOpacity(0.3),
-                                  ],
-                                  begin: AlignmentDirectional.topStart,
-                                  end: AlignmentDirectional.bottomEnd,
-                                ),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                                border: Border.all(
-                                  width: 1.5,
-                                  color: Colors.white.withOpacity(0.2),
-                                ),
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 80,
-                                    height: 80,
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        // color: Colors.grey.shade100,
-                                        borderRadius:
-                                            BorderRadius.circular(40)),
-                                    child: Lottie.asset(
-                                      'assets/animation/baby.json',
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        '$weeks Week',
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                        textScaleFactor: 2,
-                                      ),
-                                      // Text('Your baby is now the size of a gourd'),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.02,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      // height: Get.height * 0.2,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ListTile(
-                        leading: const Icon(
-                          FontAwesomeIcons.calendar,
-                          color: Color(0xff73c9c6),
-                        ),
-                        title: const Text('Due Date'),
-                        subtitle: Text(
-                          dueDate,
-                          style: const TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w700),
+                        child: ListTile(
+                          leading: const Icon(
+                            FontAwesomeIcons.calendar,
+                            color: Color(0xff73c9c6),
+                          ),
+                          title: const Text('Due Date'),
+                          subtitle: Text(
+                            dueDate,
+                            style: const TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.w700),
+                          ),
                         ),
                       ),
                     ),
@@ -197,7 +197,7 @@ class Home extends StatelessWidget {
                     Get.to(() => const OvulationCalculator());
                   }, 'Ovulation', 'assets/icons/sperm.png'),
                   navButton(() {
-                    Get.to(() => GalleryScreen());
+                    Get.to(() => const GalleryScreen());
                   }, 'Memory', 'assets/icons/photos.png'),
                   navButton(() {
                     Get.to(() => const NoteScreen());
@@ -205,6 +205,9 @@ class Home extends StatelessWidget {
                   navButton(() {
                     Get.to(const TodoList());
                   }, 'Todo List', 'assets/icons/checklist.png'),
+                  navButton(() {
+                    Get.to(const InfoScreen());
+                  }, 'Info', 'assets/icons/info.png'),
                 ],
               ),
             ],

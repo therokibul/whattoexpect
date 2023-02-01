@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:whattoexpect/constants/text_strings.dart';
 
 class WeightScreen extends StatefulWidget {
@@ -52,6 +51,12 @@ class _WeightScreenState extends State<WeightScreen> {
                 return ListTile(
                   title: Text(data['weight'] + ' KG'),
                   subtitle: Text(data['date']),
+                  trailing: IconButton(
+                    onPressed: () async {
+                      await document.reference.delete();
+                    },
+                    icon: const Icon(Icons.delete),
+                  ),
                 );
               }).toList(),
             );
@@ -66,6 +71,7 @@ class _WeightScreenState extends State<WeightScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+                      keyboardType: TextInputType.number,
                       controller: weightController,
                     ),
                   ),
